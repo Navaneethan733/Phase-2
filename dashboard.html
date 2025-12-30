@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Stackly Consulting</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      /* Dashboard Specific Styles */
+      .dashboard {
+        min-height: 100vh;
+        background: #f8fafc;
+        padding-top: 80px;
+      }
+
+      .dashboard-container {
+        display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
+        gap: 0;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 260px;
+        background: white;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+        transition: all 0.3s ease;
+        z-index: 100;
+      }
+
+      .sidebar-header {
+        padding: 30px 25px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0a58ca, #002b6b);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+
+      .user-details h3 {
+        margin: 0 0 5px 0;
+        color: #222;
+        font-size: 1.1rem;
+      }
+
+      .user-details p {
+        margin: 0;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .sidebar-menu {
+        padding: 20px 0;
+      }
+
+      .menu-section {
+        margin-bottom: 25px;
+      }
+
+      .menu-section h4 {
+        padding: 0 25px 10px;
+        color: #999;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0;
+      }
+
+      .menu-items {
+        list-style: none;
+      }
+
+      .menu-item {
+        margin: 5px 0;
+      }
+
+      .menu-item a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 25px;
+        color: #555;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+      }
+
+      .menu-item a:hover,
+      .menu-item a.active {
+        background: #f0f7ff;
+        color: #0a58ca;
+        border-left-color: #0a58ca;
+      }
+
+      .menu-item a i {
+        width: 20px;
+        text-align: center;
+        font-size: 1.1rem;
+      }
+
+      .menu-badge {
+        background: #ff4757;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.7rem;
+        margin-left: auto;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        margin-left: 260px;
+        padding: 30px;
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .dashboard-title h1 {
+        color: #222;
+        margin: 0 0 5px 0;
+        font-size: 1.8rem;
+      }
+
+      .dashboard-title p {
+        color: #666;
+        margin: 0;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .notification-btn {
+        position: relative;
+        background: none;
+        border: none;
+        color: #555;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .notification-btn:hover {
+        background: #f0f0f0;
+        color: #0a58ca;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: #ff4757;
+        color: white;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+      }
+
+      /* Stats Grid */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid #0a58ca;
+        transition: all 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .stat-card.warning {
+        border-left-color: #ffa502;
+      }
+
+      .stat-card.success {
+        border-left-color: #2ed573;
+      }
+
+      .stat-card.danger {
+        border-left-color: #ff4757;
+      }
+
+      .stat-header {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        background: #f0f7ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0a58ca;
+        font-size: 1.5rem;
+      }
+
+      .stat-card.warning .stat-icon {
+        background: #fff9f0;
+        color: #ffa502;
+      }
+
+      .stat-card.success .stat-icon {
+        background: #f0fff4;
+        color: #2ed573;
+      }
+
+      .stat-card.danger .stat-icon {
+        background: #fff0f0;
+        color: #ff4757;
+      }
+
+      .stat-trend {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .stat-trend.up {
+        color: #2ed573;
+      }
+
+      .stat-trend.down {
+        color: #ff4757;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      /* Charts and Projects Grid */
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      .chart-container,
+      .projects-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        padding: 25px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        color: #222;
+        font-size: 1.3rem;
+      }
+
+      .section-header a {
+        color: #0a58ca;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      /* Chart Placeholder */
+      .chart-placeholder {
+        height: 300px;
+        background: linear-gradient(45deg, #f8fafc, #f0f7ff);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        font-size: 1.1rem;
+      }
+
+      /* Projects List */
+      .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .project-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        background: #f8fafc;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .project-item:hover {
+        background: #f0f7ff;
+        transform: translateX(5px);
+      }
+
+      .project-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #0a58ca;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .project-info {
+        flex: 1;
+      }
+
+      .project-info h4 {
+        margin: 0 0 5px 0;
+        color: #222;
+        font-size: 0.95rem;
+      }
+
+      .project-info p {
+        margin: 0;
+        color: #666;
+        font-size: 0.8rem;
+      }
+
+      .project-status {
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+
+      .status-active {
+        background: #e3fcef;
+        color: #2ed573;
+      }
+
+      .status-pending {
+        background: #fff9f0;
+        color: #ffa502;
+      }
+
+      .status-completed {
+        background: #f0f7ff;
+        color: #0a58ca;
+      }
+
+      /* Recent Activity */
+      .activity-container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        padding: 25px;
+      }
+
+      .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .activity-item {
+        display: flex;
+        gap: 15px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .activity-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #f0f7ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0a58ca;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .activity-content h4 {
+        margin: 0 0 5px 0;
+        color: #222;
+        font-size: 0.95rem;
+      }
+
+      .activity-content p {
+        margin: 0 0 8px 0;
+        color: #666;
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+
+      .activity-time {
+        color: #999;
+        font-size: 0.75rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          transform: translateX(-100%);
+        }
+
+        .sidebar.active {
+          transform: translateX(0);
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .dashboard-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+        }
+
+        .header-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .main-content {
+          padding: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stat-card {
+          padding: 20px;
+        }
+
+        .chart-container,
+        .projects-container,
+        .activity-container {
+          padding: 20px;
+        }
+      }
+
+      /* Menu Toggle for Mobile */
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #0a58ca;
+        cursor: pointer;
+        padding: 5px;
+      }
+
+      @media (max-width: 1024px) {
+        .menu-toggle {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="./index.html" class="logo">
+          <div class="logo-icon">S</div>
+          STACKLY
+        </a>
+        <ul class="nav-menu">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./service.html">Services</a></li>
+          <li><a href="./projects.html">Projects</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li class="dropdown">
+            <a href="./dashboard.html" class="dropdown-toggle active login-btn">
+              <i class="fas fa-user"></i>
+              My Account
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="./dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+              <li><a href="./404.html"><i class="fas fa-user-cog"></i>Profile Settings</a></li>
+              <li><a href="./projects.html"><i class="fas fa-briefcase"></i>My Projects</a></li>
+              <li><a href="./404.html"><i class="fas fa-credit-card"></i>Billing</a></li>
+              <li><a href="./login.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+      <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <div class="user-info">
+              <div class="user-avatar">JD</div>
+              <div class="user-details">
+                <h3>John Anderson</h3>
+                <p>Premium Client</p>
+              </div>
+            </div>
+          </div>
+
+          <nav class="sidebar-menu">
+            <div class="menu-section">
+              <h4>Main</h4>
+              <ul class="menu-items">
+                <li class="menu-item">
+                  <a href="./dashboard.html" class="active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="./projects.html">
+                    <i class="fas fa-briefcase"></i>
+                    My Projects
+                    <span class="menu-badge">3</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="./tasks.html">
+                    <i class="fas fa-tasks"></i>
+                    Tasks
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="./documents.html">
+                    <i class="fas fa-file-alt"></i>
+                    Documents
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-section">
+              <h4>Collaboration</h4>
+              <ul class="menu-items">
+                <li class="menu-item">
+                  <a href="./team.html">
+                    <i class="fas fa-users"></i>
+                    Team Members
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="./messages.html">
+                    <i class="fas fa-comments"></i>
+                    Messages
+                    <span class="menu-badge">5</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="./meetings.html">
+                    <i class="fas fa-video"></i>
+                    Meetings
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-section">
+              <h4>Account</h4>
+              <ul class="menu-items">
+                <li class="menu-item">
+                  <a href="./profile.html">
+                    <i class="fas fa-user-cog"></i>
+                    Profile Settings
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="./billing.html">
+                    <i class="fas fa-credit-card"></i>
+                    Billing & Plans
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="./support.html">
+                    <i class="fas fa-headset"></i>
+                    Support
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="./login.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+          <div class="dashboard-header">
+            <div class="dashboard-title">
+              <h1>Welcome back, John! 👋</h1>
+              <p>Here's what's happening with your projects today</p>
+            </div>
+            <div class="header-actions">
+              <button class="notification-btn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge"></span>
+              </button>
+              <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <div class="stat-icon">
+                  <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="stat-trend up">
+                  <i class="fas fa-arrow-up"></i>
+                  12%
+                </div>
+              </div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">Active Projects</div>
+            </div>
+
+            <div class="stat-card warning">
+              <div class="stat-header">
+                <div class="stat-icon">
+                  <i class="fas fa-tasks"></i>
+                </div>
+                <div class="stat-trend down">
+                  <i class="fas fa-arrow-down"></i>
+                  5%
+                </div>
+              </div>
+              <div class="stat-value">8</div>
+              <div class="stat-label">Pending Tasks</div>
+            </div>
+
+            <div class="stat-card success">
+              <div class="stat-header">
+                <div class="stat-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-trend up">
+                  <i class="fas fa-arrow-up"></i>
+                  25%
+                </div>
+              </div>
+              <div class="stat-value">12</div>
+              <div class="stat-label">Completed Tasks</div>
+            </div>
+
+            <div class="stat-card danger">
+              <div class="stat-header">
+                <div class="stat-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-trend up">
+                  <i class="fas fa-arrow-up"></i>
+                  8%
+                </div>
+              </div>
+              <div class="stat-value">2</div>
+              <div class="stat-label">Overdue Tasks</div>
+            </div>
+          </div>
+
+          <!-- Charts and Projects -->
+          <div class="dashboard-grid">
+            <div class="chart-container">
+              <div class="section-header">
+                <h2>Project Progress</h2>
+                <a href="#">View Details</a>
+              </div>
+              <div class="chart-placeholder">
+                <i class="fas fa-chart-line"></i>
+                Project Progress Chart
+              </div>
+            </div>
+
+            <div class="projects-container">
+              <div class="section-header">
+                <h2>Recent Projects</h2>
+                <a href="#">View All</a>
+              </div>
+              <div class="projects-list">
+                <div class="project-item">
+                  <div class="project-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="project-info">
+                    <h4>Digital Transformation</h4>
+                    <p>Strategy & Implementation</p>
+                  </div>
+                  <div class="project-status status-active">Active</div>
+                </div>
+
+                <div class="project-item">
+                  <div class="project-icon">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div class="project-info">
+                    <h4>HR System Upgrade</h4>
+                    <p>Process Optimization</p>
+                  </div>
+                  <div class="project-status status-pending">Review</div>
+                </div>
+
+                <div class="project-item">
+                  <div class="project-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <div class="project-info">
+                    <h4>E-commerce Platform</h4>
+                    <p>Market Expansion</p>
+                  </div>
+                  <div class="project-status status-completed">Done</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="activity-container">
+            <div class="section-header">
+              <h2>Recent Activity</h2>
+              <a href="#">View All</a>
+            </div>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <i class="fas fa-comment"></i>
+                </div>
+                <div class="activity-content">
+                  <h4>New Message from Consultant</h4>
+                  <p>Sarah Mitchell sent you a message regarding the project timeline updates.</p>
+                  <div class="activity-time">2 hours ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <i class="fas fa-file-upload"></i>
+                </div>
+                <div class="activity-content">
+                  <h4>Document Uploaded</h4>
+                  <p>Quarterly strategy report has been uploaded to your project folder.</p>
+                  <div class="activity-time">5 hours ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="activity-content">
+                  <h4>Task Completed</h4>
+                  <p>Market research phase has been completed and approved by the team.</p>
+                  <div class="activity-time">1 day ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <i class="fas fa-calendar"></i>
+                </div>
+                <div class="activity-content">
+                  <h4>Meeting Scheduled</h4>
+                  <p>Strategy review meeting scheduled for Friday at 2:00 PM.</p>
+                  <div class="activity-time">2 days ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      // Mobile menu toggle
+      const hamburger = document.querySelector('.hamburger');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navMenu.classList.toggle('active');
+        });
+      }
+
+      // Sidebar toggle for mobile
+      const menuToggle = document.getElementById('menuToggle');
+      const sidebar = document.querySelector('.sidebar');
+      
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('active');
+        });
+      }
+
+      // Close sidebar when clicking outside on mobile
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 1024) {
+          if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+            sidebar.classList.remove('active');
+          }
+        }
+      });
+
+      // Sample data for charts (in a real app, this would be dynamic)
+      const updateStats = () => {
+        // Simulate real-time updates
+        setTimeout(() => {
+          const activeProjects = document.querySelector('.stat-card:nth-child(1) .stat-value');
+          if (activeProjects) {
+            activeProjects.textContent = Math.floor(Math.random() * 2) + 3;
+          }
+        }, 3000);
+      };
+
+      // Initialize dashboard
+      document.addEventListener('DOMContentLoaded', () => {
+        updateStats();
+        
+        // Update stats every 30 seconds
+        setInterval(updateStats, 30000);
+      });
+
+      // Notification button functionality
+      const notificationBtn = document.querySelector('.notification-btn');
+      if (notificationBtn) {
+        notificationBtn.addEventListener('click', () => {
+          alert('You have 3 new notifications:\n\n• Project review completed\n• New message from consultant\n• Document uploaded');
+        });
+      }
+    </script>
+  </body>
+</html>

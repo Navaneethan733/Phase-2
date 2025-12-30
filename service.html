@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services - Stackly Consulting</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <style>/* ------------------------------
+   Services Page Specific Styles
+------------------------------ */
+
+/* Page Header */
+.page-header {
+  background: linear-gradient(135deg, rgba(10,88,202,0.6), rgba(0,43,107,0.6)), 
+              url(./Image/service.webp) center/cover no-repeat;
+  color: #fff;
+  padding: 150px 0 80px;
+  text-align: center;
+  margin-top: 80px;
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.page-header p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 20px;
+  opacity: 0.9;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.breadcrumb a {
+  color: #ffcc00;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.breadcrumb a:hover {
+  color: #fff;
+}
+
+.breadcrumb span {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ------------------------------
+   Dropdown Menu Styles
+------------------------------ */
+.nav-menu li {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  min-width: 220px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  list-style: none;
+}
+
+.dropdown-menu li {
+  margin: 0;
+  width: 100%;
+}
+
+.dropdown-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: 100%;
+  border-left: 3px solid transparent;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu li a:hover {
+  background: #f0f3f9;
+  color: #0a58ca;
+  border-left-color: #0a58ca;
+}
+
+.dropdown-menu li a i {
+  width: 18px;
+  text-align: center;
+  color: #0a58ca;
+  font-size: 0.9rem;
+}
+
+.nav-menu li:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  content: '\f078';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+  margin-left: 5px;
+}
+
+.nav-menu li:hover .dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Mobile dropdown styles */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: #f8f9fa;
+    border-radius: 0;
+    padding-left: 20px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+
+  .nav-menu.active .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-toggle::after {
+    margin-left: auto;
+  }
+  
+  .nav-menu li {
+    width: 100%;
+  }
+  
+  .dropdown-menu li a {
+    padding: 10px 15px;
+  }
+}
+
+/* Services Overview */
+.services-overview {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.overview-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.overview-content h2 {
+  font-size: 2.5rem;
+  color: #111;
+  margin: 15px 0 20px;
+}
+
+.overview-content p {
+  color: #555;
+  line-height: 1.7;
+}
+
+.services-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  padding: 30px 20px;
+  background: #f0f3f9;
+  border-radius: 15px;
+  transition: 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  background: #0a58ca;
+  color: white;
+}
+
+.stat-item:hover h3 {
+  color: white;
+}
+
+.stat-item h3 {
+  font-size: 2.5rem;
+  color: #0a58ca;
+  margin-bottom: 10px;
+}
+
+.stat-item p {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Main Services Section */
+.main-services {
+  padding: 100px 0;
+  background: #f0f3f9;
+}
+
+.services-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.service-card {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: calc(33.333% - 20px);
+  transition: 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #0a58ca;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  background: #f0f3f9;
+  color: #0a58ca;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  transition: 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  background: #0a58ca;
+  color: white;
+}
+
+.service-card h3 {
+  margin-bottom: 15px;
+  color: #111;
+  font-size: 1.4rem;
+}
+
+.service-card p {
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.service-features {
+  list-style: none;
+  margin-bottom: 25px;
+}
+
+.service-features li {
+  padding: 8px 0;
+  color: #555;
+  position: relative;
+  padding-left: 20px;
+}
+
+.service-features li::before {
+  content: '•';
+  color: #0a58ca;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.service-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.service-btn {
+  background: #0a58ca;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.service-btn:hover {
+  background: #0842a0;
+  transform: translateY(-2px);
+}
+
+.service-duration {
+  color: #777;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Process Section */
+.process-section {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.process-steps {
+  max-width: 900px;
+  margin: 50px auto 0;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.process-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 35px;
+  top: 80px;
+  width: 2px;
+  height: calc(100% - 30px);
+  background: #e0e0e0;
+  z-index: 1;
+}
+
+.step-number {
+  width: 70px;
+  height: 70px;
+  background: #0a58ca;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-right: 30px;
+  flex-shrink: 0;
+  z-index: 2;
+  position: relative;
+}
+
+.step-content {
+  flex: 1;
+  padding-top: 10px;
+}
+
+.step-content h3 {
+  margin-bottom: 15px;
+  color: #111;
+  font-size: 1.4rem;
+}
+
+.step-content p {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Industries Section */
+.industries-section {
+  padding: 100px 0;
+  background: #f0f3f9;
+}
+
+.industries-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.industry-card {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: calc(33.333% - 20px);
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.industry-icon {
+  width: 80px;
+  height: 80px;
+  background: #f0f3f9;
+  color: #0a58ca;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 1.8rem;
+  transition: 0.3s ease;
+}
+
+.industry-card:hover .industry-icon {
+  background: #0a58ca;
+  color: white;
+}
+
+.industry-card h3 {
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.industry-card p {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Pricing Section */
+.pricing-section {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.pricing-plans {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.pricing-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  padding: 0;
+  width: calc(33.333% - 20px);
+  transition: 0.3s ease;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.pricing-card.featured {
+  border-color: #0a58ca;
+  transform: scale(1.05);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0a58ca;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pricing-header {
+  padding: 40px 30px 30px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pricing-header h3 {
+  margin-bottom: 15px;
+  color: #111;
+  font-size: 1.5rem;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0a58ca;
+  margin-bottom: 10px;
+}
+
+.price span {
+  font-size: 1rem;
+  color: #777;
+}
+
+.pricing-header p {
+  color: #777;
+  margin: 0;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 30px;
+  margin: 0;
+}
+
+.pricing-features li {
+  padding: 12px 0;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.pricing-features li i {
+  color: #0a58ca;
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+
+.pricing-btn {
+  display: block;
+  margin: 0 30px 30px;
+  padding: 15px;
+  text-align: center;
+  background: #f0f3f9;
+  color: #0a58ca;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.pricing-btn.primary {
+  background: #0a58ca;
+  color: white;
+}
+
+.pricing-btn:hover {
+  background: #0842a0;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card.featured:hover {
+  transform: scale(1.05) translateY(-10px);
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #0a58ca, #002b6b);
+  color: #fff;
+  text-align: center;
+}
+
+.cta-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.cta-content p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  opacity: 0.9;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Footer Social Icons */
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  background: #ffcc00;
+  color: #002b6b;
+  transform: translateY(-3px);
+}
+
+/* ------------------------------
+   Responsive Design
+------------------------------ */
+@media (max-width: 1024px) {
+  .service-card, .industry-card, .pricing-card {
+    width: calc(50% - 15px);
+  }
+  
+  .pricing-card.featured {
+    transform: scale(1);
+    order: -1;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .pricing-card.featured:hover {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .page-header p {
+    font-size: 1rem;
+  }
+  
+  .overview-content h2 {
+    font-size: 2rem;
+  }
+  
+  .services-stats {
+    flex-direction: column;
+  }
+  
+  .service-card, .industry-card, .pricing-card {
+    width: 100%;
+  }
+  
+  .process-step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .step-number {
+    margin: 0 auto 20px;
+  }
+  
+  .process-step:not(:last-child)::after {
+    left: 50%;
+    top: 70px;
+    height: calc(100% - 20px);
+    transform: translateX(-50%);
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-buttons .btn {
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: 120px 0 60px;
+  }
+  
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .overview-content h2 {
+    font-size: 1.7rem;
+  }
+  
+  .service-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}</style>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">
+          <div class="logo-icon">S</div>
+          STACKLY
+        </a>
+        <ul class="nav-menu">
+          <li>
+            <a href="./index.html" class="dropdown-toggle">
+              <i class="fas fa-home"></i>
+              Home
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="./index.html"><i class="fas fa-palette"></i>Home 1</a></li>
+              <li><a href="./home2.html"><i class="fas fa-star"></i>Home 2</a></li>
+            </ul>
+          </li>
+          <li><a href="./about.html"><i class="fas fa-users"></i>About</a></li>
+          <li><a href="./service.html"><i class="fas fa-cog"></i>Services</a></li>
+          <li><a href="./projects.html"><i class="fas fa-project-diagram"></i>Projects</a></li>
+          <li><a href="./contact.html"><i class="fas fa-envelope"></i>Contact</a></li>
+          <li><a href="./dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+          <li><a href="./login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i>Login</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="section-container">
+        <h1>Our Services</h1>
+        <p>Comprehensive consulting solutions to drive your business growth and success</p>
+        <div class="breadcrumb">
+          <a href="./service.html">Home</a> / <span>Services</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview reveal">
+      <div class="section-container">
+        <div class="overview-content">
+          <p class="sub-heading">What We Offer</p>
+          <h2>Strategic Consulting Solutions</h2>
+          <p>At Stackly Consulting, we provide a comprehensive suite of services designed to address your unique business challenges and opportunities. Our expert consultants work closely with you to develop customized strategies that deliver measurable results.</p>
+        </div>
+        <div class="services-stats">
+          <div class="stat-item">
+            <h3>15+</h3>
+            <p>Service Categories</p>
+          </div>
+          <div class="stat-item">
+            <h3>500+</h3>
+            <p>Projects Completed</p>
+          </div>
+          <div class="stat-item">
+            <h3>98%</h3>
+            <p>Client Satisfaction</p>
+          </div>
+          <div class="stat-item">
+            <h3>25+</h3>
+            <p>Years Experience</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Services Section -->
+    <section class="main-services reveal">
+      <div class="section-container">
+        <div class="section-header">
+          <p class="sub-heading">Our Expertise</p>
+          <h2>Core Consulting Services</h2>
+          <p>We specialize in these key areas to help businesses achieve their strategic objectives</p>
+        </div>
+        
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Business Strategy</h3>
+            <p>Develop comprehensive business strategies to drive growth, improve competitiveness, and achieve long-term objectives.</p>
+            <ul class="service-features">
+              <li>Strategic Planning</li>
+              <li>Market Analysis</li>
+              <li>Competitive Positioning</li>
+              <li>Growth Strategy</li>
+            </ul>
+            <div class="service-footer">
+              <a href="./404.html" class="service-btn">Learn More</a>
+              <span class="service-duration">4-12 weeks</span>
+            </div>
+          </div>
+          
+          <!-- Service 2 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <h3>Project Management</h3>
+            <p>Efficiently manage projects from conception to completion with our expert guidance and proven methodologies.</p>
+            <ul class="service-features">
+              <li>Project Planning</li>
+              <li>Risk Management</li>
+              <li>Resource Allocation</li>
+              <li>Performance Tracking</li>
+            </ul>
+            <div class="service-footer">
+              <a href="./404.html" class="service-btn">Learn More</a>
+              <span class="service-duration">Project-based</span>
+            </div>
+          </div>
+          
+          <!-- Service 3 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3>Market Research</h3>
+            <p>Gain valuable insights into your market, customers, and competitors with our comprehensive research services.</p>
+            <ul class="service-features">
+              <li>Consumer Insights</li>
+              <li>Market Trends</li>
+              <li>Competitive Analysis</li>
+              <li>Feasibility Studies</li>
+            </ul>
+            <div class="service-footer">
+              <a href="./404.html" class="service-btn">Learn More</a>
+              <span class="service-duration">2-8 weeks</span>
+            </div>
+          </div>
+          
+          <!-- Service 4 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>Human Resources</h3>
+            <p>Optimize your workforce with our HR consulting, talent management, and organizational development solutions.</p>
+            <ul class="service-features">
+              <li>Talent Acquisition</li>
+              <li>Performance Management</li>
+              <li>Training & Development</li>
+              <li>HR Compliance</li>
+            </ul>
+            <div class="service-footer">
+              <a href="./404.html" class="service-btn">Learn More</a>
+              <span class="service-duration">Ongoing</span>
+            </div>
+          </div>
+          
+          <!-- Service 5 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-digital-tachograph"></i>
+            </div>
+            <h3>Digital Transformation</h3>
+            <p>Leverage technology to transform your business operations, customer experiences, and revenue models.</p>
+            <ul class="service-features">
+              <li>Technology Strategy</li>
+              <li>Process Automation</li>
+              <li>Digital Marketing</li>
+              <li>Data Analytics</li>
+            </ul>
+            <div class="service-footer">
+              <a href="./404.html" class="service-btn">Learn More</a>
+              <span class="service-duration">3-9 months</span>
+            </div>
+          </div>
+          
+          <!-- Service 6 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <h3>Financial Consulting</h3>
+            <p>Improve financial performance, manage risks, and make informed investment decisions with our expertise.</p>
+            <ul class="service-features">
+              <li>Financial Planning</li>
+              <li>Cost Optimization</li>
+              <li>Investment Analysis</li>
+              <li>Risk Management</li>
+            </ul>
+            <div class="service-footer">
+              <a href="./404.html" class="service-btn">Learn More</a>
+              <span class="service-duration">4-16 weeks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section reveal">
+      <div class="section-container">
+        <div class="section-header">
+          <p class="sub-heading">Our Approach</p>
+          <h2>How We Work</h2>
+          <p>Our proven process ensures we deliver maximum value to your organization</p>
+        </div>
+        
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">01</div>
+            <div class="step-content">
+              <h3>Discovery & Analysis</h3>
+              <p>We begin by thoroughly understanding your business, challenges, and objectives through in-depth analysis and stakeholder interviews.</p>
+            </div>
+          </div>
+          
+          <div class="process-step">
+            <div class="step-number">02</div>
+            <div class="step-content">
+              <h3>Strategy Development</h3>
+              <p>Based on our findings, we develop customized strategies and actionable plans tailored to your specific needs and goals.</p>
+            </div>
+          </div>
+          
+          <div class="process-step">
+            <div class="step-number">03</div>
+            <div class="step-content">
+              <h3>Implementation</h3>
+              <p>We work alongside your team to implement the strategies, providing guidance and support throughout the execution phase.</p>
+            </div>
+          </div>
+          
+          <div class="process-step">
+            <div class="step-number">04</div>
+            <div class="step-content">
+              <h3>Measurement & Optimization</h3>
+              <p>We track performance metrics, measure results, and make necessary adjustments to ensure continuous improvement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industry Specialization -->
+    <section class="industries-section reveal">
+      <div class="section-container">
+        <div class="section-header">
+          <p class="sub-heading">Industries We Serve</p>
+          <h2>Cross-Industry Expertise</h2>
+          <p>We have extensive experience working with businesses across various sectors</p>
+        </div>
+        
+        <div class="industries-grid">
+          <div class="industry-card">
+            <div class="industry-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3>Technology</h3>
+            <p>Strategic guidance for tech companies, startups, and digital transformation initiatives.</p>
+          </div>
+          
+          <div class="industry-card">
+            <div class="industry-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <h3>Financial Services</h3>
+            <p>Consulting for banks, insurance companies, fintech, and investment firms.</p>
+          </div>
+          
+          <div class="industry-card">
+            <div class="industry-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3>Retail & E-commerce</h3>
+            <p>Strategies for omnichannel retail, customer experience, and supply chain optimization.</p>
+          </div>
+          
+          <div class="industry-card">
+            <div class="industry-icon">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <h3>Healthcare</h3>
+            <p>Consulting for healthcare providers, pharma, medtech, and health insurance companies.</p>
+          </div>
+          
+          <div class="industry-card">
+            <div class="industry-icon">
+              <i class="fas fa-industry"></i>
+            </div>
+            <h3>Manufacturing</h3>
+            <p>Operational excellence, supply chain optimization, and digital manufacturing solutions.</p>
+          </div>
+          
+          <div class="industry-card">
+            <div class="industry-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>Education</h3>
+            <p>Strategic planning for educational institutions, edtech, and corporate training providers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section reveal">
+      <div class="section-container">
+        <div class="section-header">
+          <p class="sub-heading">Pricing Options</p>
+          <h2>Flexible Engagement Models</h2>
+          <p>We offer various engagement options to suit your specific needs and budget</p>
+        </div>
+        
+        <div class="pricing-plans">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Project-Based</h3>
+              <div class="price">$5,000+</div>
+              <p>Fixed price for specific projects</p>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Defined scope and deliverables</li>
+              <li><i class="fas fa-check"></i> Fixed timeline</li>
+              <li><i class="fas fa-check"></i> Predictable cost</li>
+              <li><i class="fas fa-check"></i> Dedicated project team</li>
+              <li><i class="fas fa-check"></i> Comprehensive reporting</li>
+            </ul>
+            <a href="./contact.html" class="pricing-btn">Get Started</a>
+          </div>
+          
+          <div class="pricing-card featured">
+            <div class="pricing-badge">Most Popular</div>
+            <div class="pricing-header">
+              <h3>Retainer</h3>
+              <div class="price">$2,500<span>/month</span></div>
+              <p>Ongoing strategic support</p>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Monthly advisory services</li>
+              <li><i class="fas fa-check"></i> Flexible hours</li>
+              <li><i class="fas fa-check"></i> Priority support</li>
+              <li><i class="fas fa-check"></i> Regular strategy sessions</li>
+              <li><i class="fas fa-check"></i> Ongoing performance tracking</li>
+            </ul>
+            <a href="./contact.html" class="pricing-btn primary">Get Started</a>
+          </div>
+          
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>Hourly Consulting</h3>
+              <div class="price">$150<span>/hour</span></div>
+              <p>Flexible advisory services</p>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fas fa-check"></i> Pay only for time used</li>
+              <li><i class="fas fa-check"></i> No long-term commitment</li>
+              <li><i class="fas fa-check"></i> Access to senior consultants</li>
+              <li><i class="fas fa-check"></i> Flexible scheduling</li>
+              <li><i class="fas fa-check"></i> Detailed time reporting</li>
+            </ul>
+            <a href="./contact.html" class="pricing-btn">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section reveal">
+      <div class="section-container">
+        <div class="cta-content">
+          <h2>Ready to Transform Your Business?</h2>
+          <p>Contact us today for a free consultation to discuss how our services can drive growth and success for your organization.</p>
+          <div class="cta-buttons">
+            <a href="./404.html" class="btn primary-btn">Get Free Consultation</a>
+            <a href="./404.html" class="btn secondary-btn">View Case Studies</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="section-container">
+        <div class="footer-container">
+          <div class="footer-about">
+            <div class="footer-logo">
+              <div class="logo-icon">S</div>
+              STACKLY
+            </div>
+            <p>We are a leading consulting firm dedicated to helping businesses achieve their goals through innovative strategies and expert guidance.</p>
+            <div class="social-links">
+              <a href="./404.html"><i class="fab fa-facebook-f"></i></a>
+              <a href="./404.html"><i class="fab fa-twitter"></i></a>
+              <a href="./404.html"><i class="fab fa-instagram"></i></a>
+              <a href="./404.html"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="./index.html">Home</a></li>
+              <li><a href="./about.html">About</a></li>
+              <li><a href="./services.html">Services</a></li>
+              <li><a href="./projects.html">Projects</a></li>
+              <li><a href="./contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p><strong>Email:</strong> support@stackly.com</p>
+            <p><strong>Phone:</strong> +91 98765 43210</p>
+            <p><strong>Location:</strong> Salem, India</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Stackly Consulting. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Scroll reveal animation
+      window.addEventListener('scroll', reveal);
+      
+      function reveal() {
+        const reveals = document.querySelectorAll('.reveal');
+        
+        for(let i = 0; i < reveals.length; i++) {
+          const windowHeight = window.innerHeight;
+          const revealTop = reveals[i].getBoundingClientRect().top;
+          const revealPoint = 150;
+          
+          if(revealTop < windowHeight - revealPoint) {
+            reveals[i].classList.add('active');
+          }
+        }
+      }
+      
+      // Mobile menu toggle
+      const hamburger = document.querySelector('.hamburger');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+      
+      // Initialize on load
+      window.addEventListener('load', reveal);
+    </script>
+  </body>
+</html>
